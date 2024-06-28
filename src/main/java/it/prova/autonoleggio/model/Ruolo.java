@@ -12,11 +12,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ruolo")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "ruolo")
 public class Ruolo {
 
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
