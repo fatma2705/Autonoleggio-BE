@@ -30,16 +30,19 @@ public class Prenotazione {
 
 	@ManyToOne
 	@JoinColumn(name = "utente_id", nullable = false)
-	private Utente utente;
+	private Long utenteId;
 
 	@ManyToOne
 	@JoinColumn(name = "auto_id", nullable = false)
-	private Auto auto;
+	private Long autoId;
 
 	@Column(name = "data_inizio")
 	private LocalDate dataInizio;
 
 	@Column(name = "data_fine")
 	private LocalDate dataFine;
+	
+	@Column(name = "annullata")
+	private Boolean annullata;
 
 }

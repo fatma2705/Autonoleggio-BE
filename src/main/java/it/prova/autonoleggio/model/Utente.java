@@ -16,6 +16,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -67,5 +70,18 @@ public class Utente {
 
 	@OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
 	private List<Prenotazione> prenotazioni;
+
+	public Utente(Long id, String username, String password, String confermaPassword, String email, String nome,
+			String cognome, Boolean attivo, LocalDate dataConseguimentoPatente) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.confermaPassword = confermaPassword;
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.attivo = attivo;
+		this.dataConseguimentoPatente = dataConseguimentoPatente;
+	}
 
 }
