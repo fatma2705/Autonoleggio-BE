@@ -15,7 +15,7 @@ public interface UtenteRepository extends CrudRepository<Utente, Long>, JpaRepos
 	Optional<Utente> findByUsername(String username);
 
 	@Query("from Utente u left join fetch u.ruoli where u.id = ?1")
-	Optional<Utente> fingByIdConRuoli(Long id);
+	Optional<Utente> findByIdConRuoli(Long id);
 
 	@EntityGraph(attributePaths = { "ruoli" })
 	Utente findByUsernameAndPasswordAndAttivo(String username, String password, Boolean attivo);
