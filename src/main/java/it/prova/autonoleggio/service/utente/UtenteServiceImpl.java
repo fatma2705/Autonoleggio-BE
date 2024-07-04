@@ -6,8 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import it.prova.autonoleggio.exception.CreditMustBeZeroException;
 import it.prova.autonoleggio.exception.IdNotNullForInsertException;
@@ -17,7 +17,10 @@ import it.prova.autonoleggio.model.Ruolo;
 import it.prova.autonoleggio.model.Utente;
 import it.prova.autonoleggio.repository.ruolo.RuoloRepository;
 import it.prova.autonoleggio.repository.utente.UtenteRepository;
+import jakarta.transaction.Transactional;
 
+@Service
+@Transactional
 public class UtenteServiceImpl implements UtenteService {
 
 	@Autowired
