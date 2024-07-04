@@ -40,7 +40,7 @@ public class JWTUtil {
 
 		return JWT.create().withSubject("User Details").withClaim("username", username)
 				.withClaim("nome", utente.getNome()).withArrayClaim("currentUser", ruoliArray).withIssuedAt(new Date())
-				.withIssuer("ANALISI").withExpiresAt(new Date((new Date()).getTime() + jwtExpirationMs))
+				.withIssuer("AUTONOLEGGIO").withExpiresAt(new Date((new Date()).getTime() + jwtExpirationMs))
 				.sign(Algorithm.HMAC256(secret));
 
 	}

@@ -2,7 +2,9 @@ package it.prova.autonoleggio.dto;
 
 import java.time.LocalDate;
 
+import it.prova.autonoleggio.model.Auto;
 import it.prova.autonoleggio.model.Prenotazione;
+import it.prova.autonoleggio.model.Utente;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,10 +20,10 @@ public class PrenotazioneDTO {
 	private Long id;
 
 	@NotNull(message = "{utente.notnull}")
-	private Long utenteId;
+	private Utente utente;
 
 	@NotNull(message = "{auto.notnull}")
-	private Long autoId;
+	private Auto auto;
 
 	@NotNull(message = "{dataInizio.notnull}")
 	private LocalDate dataInizio;
@@ -33,13 +35,13 @@ public class PrenotazioneDTO {
 	private Boolean annullata;
 
 	public Prenotazione buildPrenotazioneModel() {
-		return Prenotazione.builder().id(this.id).utenteId(this.utenteId).autoId(this.autoId)
-				.dataInizio(this.dataInizio).dataFine(this.dataFine).annullata(this.annullata).build();
+		return Prenotazione.builder().id(this.id).utente(this.utente).auto(this.auto).dataInizio(this.dataInizio)
+				.dataFine(this.dataFine).annullata(this.annullata).build();
 
 	}
 
 	public static PrenotazioneDTO buildPrenotazioneDTOFromModel(Prenotazione model) {
-		return new PrenotazioneDTO(model.getId(), model.getUtenteId(), model.getAutoId(), model.getDataInizio(),
+		return new PrenotazioneDTO(model.getId(), model.getUtente(), model.getAuto(), model.getDataInizio(),
 				model.getDataFine(), model.getAnnullata());
 	}
 
