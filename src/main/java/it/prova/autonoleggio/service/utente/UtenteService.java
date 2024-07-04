@@ -25,5 +25,7 @@ public interface UtenteService {
 	public void changeUserAbilitation(Long utenteInstanceId);
 
 	public Utente findByUsername(String username);
+	
+	public Utente aggiornaCredito(Utente utenteInstance);
 
 }

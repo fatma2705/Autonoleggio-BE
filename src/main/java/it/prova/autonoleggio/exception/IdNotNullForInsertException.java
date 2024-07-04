@@ -4,7 +4,7 @@ public class IdNotNullForInsertException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public IdNotNullForInsertException(String msg) {
-		super(msg);
+	public IdNotNullForInsertException() {
+		super("Id must be null for insert operation");
 	}
 }

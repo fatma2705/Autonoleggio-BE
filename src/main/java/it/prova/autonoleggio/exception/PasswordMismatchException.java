@@ -4,7 +4,7 @@ public class PasswordMismatchException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public PasswordMismatchException(String msg) {
-		super(msg);
+	public PasswordMismatchException() {
+		super("Passwords do not match. Please ensure both password fields are identical");
 	}
 }
