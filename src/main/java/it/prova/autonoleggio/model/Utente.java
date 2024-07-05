@@ -84,4 +84,12 @@ public class Utente {
 		this.dataConseguimentoPatente = dataConseguimentoPatente;
 	}
 
+	public boolean isAdmin() {
+		for (Ruolo ruoloItem : ruoli) {
+			if (ruoloItem.getCodice().equals(Ruolo.ROLE_ADMIN))
+				return true;
+		}
+		return false;
+	}
+
 }

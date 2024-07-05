@@ -6,16 +6,16 @@ import it.prova.autonoleggio.model.Prenotazione;
 
 public interface PrenotazioneService {
 
-	public void annullaPrenotazione(Prenotazione prenotazione);
+	public void annullaPrenotazione(Prenotazione prenotazione,String username);
 
-	public List<Prenotazione> listAllPrenotazioni();
+	public Prenotazione modificaPrenotazione(Prenotazione prenotazione,String username);
 
-	public Prenotazione modificaPrenotazione(Prenotazione prenotazione);
+	public void eliminaPrenotazione(Long id,String username);
 
-	public Prenotazione eliminaPrenotazione(Long id);
+	public List<Prenotazione> listaStoricoPrenotazioniAdmin(String Admin);
+	
+	public List<Prenotazione> listaStoricoPrenotazioniUtente(String username);
 
-	public List<Prenotazione> listaStoricoPrenotazioni();
-
-	public Prenotazione insertPrenotazione(Prenotazione prenotazione);
+	public Prenotazione insertPrenotazione(Prenotazione prenotazione,String username);
 
 }

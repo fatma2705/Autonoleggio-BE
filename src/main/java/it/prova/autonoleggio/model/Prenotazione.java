@@ -43,6 +43,7 @@ public class Prenotazione {
 	private LocalDate dataFine;
 	
 	@Column(name = "annullata")
-	private Boolean annullata;
+    private Boolean annullata = false; // Default value set to false
+
 
 }

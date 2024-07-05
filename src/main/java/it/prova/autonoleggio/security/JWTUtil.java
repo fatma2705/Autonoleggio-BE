@@ -48,7 +48,7 @@ public class JWTUtil {
 	// Method to verify the JWT and then decode and extract the username stored in
 	// the payload of the token
 	public String validateTokenAndRetrieveSubject(String token) throws JWTVerificationException {
-		JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).withSubject("User Details").withIssuer("ANALISI")
+		JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).withSubject("User Details").withIssuer("AUTONOLEGGIO")
 				.build();
 		DecodedJWT jwt = verifier.verify(token);
 		return jwt.getClaim("username").asString();
