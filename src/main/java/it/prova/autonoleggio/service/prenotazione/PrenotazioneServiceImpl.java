@@ -30,8 +30,8 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 	private AutoRepository autoRepository;
 
 	@Override
-	public void annullaPrenotazione(Prenotazione input, String username) {
-		Prenotazione prenotazione = prenotazioneRepository.findById(input.getId()).orElse(null);
+	public void annullaPrenotazione(Long id, String username) {
+		Prenotazione prenotazione = prenotazioneRepository.findById(id).orElse(null);
 		if (prenotazione.equals(null))
 			throw new PrenotazioneNotfoundException();
 		if (!(prenotazione.getUtente().getUsername().equals(username)))
@@ -48,6 +48,9 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 			throw new PrenotazioneNotfoundException();
 		if (!(prenotazione.getUtente().getUsername().equals(username)))
 			throw new AccessDeniedException();
+		if (!(autoRepository.isAutoAvailable(input.getAuto().getId(), input.getDataInizio(),
+				input.getDataFine())))
+			throw new CarNotAvailableException();
 		return prenotazioneRepository.save(input);
 	}
 
