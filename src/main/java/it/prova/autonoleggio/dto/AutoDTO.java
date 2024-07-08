@@ -24,7 +24,7 @@ public class AutoDTO {
 	@NotBlank(message = "{targa.notblank}")
 	private String targa;
 
-	@NotBlank(message = "{tipologia.notblank}")
+	@NotNull(message = "{tipologia.notnull}")
 	private TipoAuto tipologia;
 
 	@NotBlank(message = "{marca.notblank}")
@@ -33,7 +33,7 @@ public class AutoDTO {
 	@NotBlank(message = "{modello.notblank}")
 	private String modello;
 
-	@NotBlank(message = "{tipoMotore.notblank}")
+	@NotNull(message = "{tipoMotore.notnull}")
 	private TipoMotore tipoMotore;
 
 	@NotNull(message = "{cilindrata.notnull}")

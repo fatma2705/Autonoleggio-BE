@@ -56,9 +56,6 @@ public class AutoServiceImpl implements AutoService {
 
 	@Override
 	public List<Auto> findByExample(Auto example) {
-		Auto auto = autoRepository.findById(example.getId()).orElse(null);
-		if (auto.equals(null))
-			throw new AutoNotFoundException();
 		return autoRepository.findByExample(example.getTarga(), example.getTipologia(), example.getMarca(),
 				example.getModello(), example.getCilindrata(), example.getTipoMotore(), example.getNumeroPosti(),
 				example.getCambioAutomatico(), example.getDataImmatricolazione(), example.getDescrizione(),

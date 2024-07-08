@@ -71,8 +71,27 @@ public class Utente {
 	@OneToMany(mappedBy = "utente", fetch = FetchType.LAZY)
 	private List<Prenotazione> prenotazioni;
 
+	public Utente(String username, String password, String confermaPassword, String email, String nome, String cognome,
+			Boolean attivo, Set<Ruolo> ruoli) {
+		this.username = username;
+		this.password = password;
+		this.confermaPassword = confermaPassword;
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.attivo = attivo;
+		this.ruoli = ruoli;
+	}
+
 	public Utente(Long id, String username, String password, String confermaPassword, String email, String nome,
-			String cognome, Boolean attivo, LocalDate dataConseguimentoPatente) {
+			String cognome, Boolean attivo, LocalDate dataConseguimentoPatente, Set<Ruolo> ruoli) {
+		this(username, password, confermaPassword, email, nome, cognome, attivo, ruoli);
+		this.dataConseguimentoPatente = dataConseguimentoPatente;
+		this.id = id;
+	}
+
+	public Utente(Long id , String username, String password, String confermaPassword, String email, String nome, String cognome,
+			Boolean attivo, LocalDate dataConseguimentoPatente) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
