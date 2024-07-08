@@ -40,10 +40,10 @@ public class AutoServiceImpl implements AutoService {
 	}
 
 	@Override
-	public void inserisciNuovo(Auto autoInstance) {
+	public Auto inserisciNuovo(Auto autoInstance) {
 		if (autoInstance.getId() != null)
 			throw new IdNotNullForInsertException();
-		autoRepository.save(autoInstance);
+		return autoRepository.save(autoInstance);
 	}
 
 	@Override

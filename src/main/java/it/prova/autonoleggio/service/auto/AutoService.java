@@ -12,7 +12,7 @@ public interface AutoService {
 
 	public Auto aggiorna(Auto autoInstance);
 
-	public void inserisciNuovo(Auto autoInstance);
+	public Auto inserisciNuovo(Auto autoInstance);
 
 	public void rimuovi(Long idToRemove);
 	
