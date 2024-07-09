@@ -44,15 +44,16 @@ public class PrenotazioneController {
 
 	}
 
-	@PostMapping
+	@PostMapping("/inserisci")
 	@ResponseStatus(HttpStatus.CREATED)
 	public PrenotazioneDTO inserisciPrenotazione(@Valid @RequestBody PrenotazioneDTO input, Principal principal) {
 		Prenotazione prenotazione = input.buildPrenotazioneModel();
 		prenotazione = prenotazioneService.insertPrenotazione(prenotazione, principal.getName());
-		return PrenotazioneDTO.buildPrenotazioneDTOFromModel(prenotazione);
+		return PrenotazioneDTO.buildResponsePrenotazioneDTOFromModel(prenotazione);
 	}
 
 	@PutMapping("/annullaPrenotazione/{id}")
+	@ResponseStatus(HttpStatus.OK)
 	public void annullaPrenotazione(@PathVariable(name = "id", required = true) Long id, Principal principal) {
 		prenotazioneService.annullaPrenotazione(id, principal.getName());
 

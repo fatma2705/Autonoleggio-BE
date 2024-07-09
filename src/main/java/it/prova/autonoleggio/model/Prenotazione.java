@@ -2,6 +2,9 @@ package it.prova.autonoleggio.model;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,10 +33,12 @@ public class Prenotazione {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Cascade({CascadeType.MERGE})
 	@JoinColumn(name = "utente_id", nullable = false)
 	private Utente utente;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Cascade({CascadeType.MERGE})
 	@JoinColumn(name = "auto_id", nullable = false)
 	private Auto auto;
 

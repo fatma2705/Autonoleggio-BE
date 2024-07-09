@@ -30,14 +30,16 @@ public interface AutoRepository extends CrudRepository<Auto, Long> {
 			@Param("dataImmatricolazione") LocalDate dataImmatricolazione, @Param("descrizione") String descrizione,
 			@Param("prezzoPerGiornata") Float prezzoPerGiornata);
 
-	@Query("SELECT COUNT(p) FROM Prenotazione p " + "WHERE p.auto.id = :autoId " + "AND p.annullata = false "
-			+ "AND ((p.dataInizio >= :dataFine OR p.dataFine <= :dataInizio) OR (p.dataInizio IS NULL AND p.dataFine IS NULL))")
-	Long countPrenotazioniNonSovrapposte(@Param("autoId") Long autoId, @Param("dataInizio") LocalDate dataInizio,
+	@Query("SELECT COUNT(*)  " + "FROM Prenotazione p " + "WHERE p.auto.id = :autoId " + "AND p.annullata = false "
+			+ "AND p.dataInizio <= :dataFine " + "AND p.dataFine >= :dataInizio")
+	Integer countPrenotazioniNonSovrapposte(@Param("autoId") Long autoId, @Param("dataInizio") LocalDate dataInizio,
 			@Param("dataFine") LocalDate dataFine);
 
 	default boolean isAutoAvailable(Long autoId, LocalDate dataInizio, LocalDate dataFine) {
-		Long count = countPrenotazioniNonSovrapposte(autoId, dataInizio, dataFine);
-		return count == 0;
+		Integer count = countPrenotazioniNonSovrapposte(autoId, dataInizio, dataFine);
+		if (count == 0)
+			return true;
+		return false;
 	}
 
 }

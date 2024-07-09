@@ -65,7 +65,7 @@ public class UtenteServiceImpl implements UtenteService {
 		if (utenteInstance.getId() != null) {
 			throw new IdNotNullForInsertException();
 		}
-		if (utenteInstance.getRuoli() == null) {
+		if (utenteInstance.getRuoli() == null || utenteInstance.getRuoli().isEmpty()) {
 			Set<Ruolo> ruoli = new HashSet<Ruolo>();
 			ruoli.add(ruoloRepository.findByCodice(Ruolo.ROLE_CLASSIC_USER));
 			utenteInstance.setRuoli(ruoli);
