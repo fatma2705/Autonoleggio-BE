@@ -41,6 +41,12 @@ public class Prenotazione {
 	@Cascade({CascadeType.MERGE})
 	@JoinColumn(name = "auto_id", nullable = false)
 	private Auto auto;
+	
+	@Column(name = "localita_ritiro")
+	private Localita localitaRitiro;
+	
+	@Column(name = "localita_consegna")
+	private Localita localitaConsegna;
 
 	@Column(name = "data_inizio")
 	private LocalDate dataInizio;

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import it.prova.autonoleggio.model.Auto;
+import it.prova.autonoleggio.model.Localita;
 import it.prova.autonoleggio.model.Prenotazione;
 import it.prova.autonoleggio.model.Utente;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,12 @@ public class PrenotazioneDTO {
 	@NotNull(message = "{auto.notnull}")
 	private Auto auto;
 
+	@NotNull(message = "{localitaRitiro.notnull}")
+	private Localita localitaRitiro;
+
+	@NotNull(message = "{localitaConsegna.notnull}")
+	private Localita localitaConsegna;
+
 	@NotNull(message = "{dataInizio.notnull}")
 	private LocalDate dataInizio;
 
@@ -44,20 +51,28 @@ public class PrenotazioneDTO {
 		this.dataFine = dataFine;
 	}
 
+	public PrenotazioneDTO(Long id, Localita localitaRitiro, Localita localitaConsegna, LocalDate dataInizio,
+			LocalDate dataFine) {
+		this(id, dataInizio, dataFine);
+		this.localitaRitiro = localitaRitiro;
+		this.localitaConsegna = localitaConsegna;
+	}
+
 	public Prenotazione buildPrenotazioneModel() {
-		return Prenotazione.builder().id(this.id).utente(this.utente).auto(this.auto).dataInizio(this.dataInizio)
+		return Prenotazione.builder().id(this.id).utente(this.utente).auto(this.auto)
+				.localitaRitiro(this.localitaRitiro).localitaConsegna(this.localitaConsegna).dataInizio(this.dataInizio)
 				.dataFine(this.dataFine).annullata(this.annullata).build();
 
 	}
-	
+
 	public static PrenotazioneDTO buildPrenotazioneDTOFromModel(Prenotazione model) {
-		return new PrenotazioneDTO(model.getId(),model.getUtente(),model.getAuto(), model.getDataInizio(), model.getDataFine(),model.getAnnullata());
+		return new PrenotazioneDTO(model.getId(), model.getUtente(), model.getAuto(), model.getLocalitaRitiro(),
+				model.getLocalitaConsegna(), model.getDataInizio(), model.getDataFine(), model.getAnnullata());
 	}
 
-	
-
 	public static PrenotazioneDTO buildResponsePrenotazioneDTOFromModel(Prenotazione model) {
-		return new PrenotazioneDTO(model.getId(), model.getDataInizio(), model.getDataFine());
+		return new PrenotazioneDTO(model.getId(), model.getLocalitaRitiro(), model.getLocalitaRitiro(),
+				model.getDataInizio(), model.getDataFine());
 	}
 
 }
