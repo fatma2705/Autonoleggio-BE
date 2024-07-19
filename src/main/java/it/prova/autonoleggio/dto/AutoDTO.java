@@ -53,12 +53,15 @@ public class AutoDTO {
 
 	@NotNull(message = "{prezzoPerGiornata.notnull}")
 	private Float prezzoPerGiornata;
+	
+	@NotNull(message = "{imageUrl.notnull}")
+	private String imageUrl;
 
 	private List<PrenotazioneDTO> prenotazioni;
 
 	public AutoDTO(Long id, String targa, TipoAuto tipologia, String marca, String modello, TipoMotore tipoMotore,
 			Integer cilindrata, Integer numeroPosti, Boolean cambioAutomatico, LocalDate dataImmatricolazione,
-			String descrizione, Float prezzoPerGiornata) {
+			String descrizione, Float prezzoPerGiornata, String imageUrl) {
 		this.id = id;
 		this.targa = targa;
 		this.tipologia = tipologia;
@@ -71,6 +74,7 @@ public class AutoDTO {
 		this.dataImmatricolazione = dataImmatricolazione;
 		this.descrizione = descrizione;
 		this.prezzoPerGiornata = prezzoPerGiornata;
+		this.imageUrl = imageUrl;
 	}
 
 	public Auto buildAutoModel() {
@@ -78,13 +82,13 @@ public class AutoDTO {
 				.modello(this.modello).tipoMotore(this.tipoMotore).cilindrata(this.cilindrata)
 				.numeroPosti(this.numeroPosti).cambioAutomatico(this.cambioAutomatico)
 				.dataImmatricolazione(this.dataImmatricolazione).descrizione(this.descrizione)
-				.prezzoPerGiornata(this.prezzoPerGiornata).build();
+				.prezzoPerGiornata(this.prezzoPerGiornata).imageUrl(this.imageUrl).build();
 	}
 
 	public static AutoDTO buildAutoDTOFromModel(Auto model) {
 		return new AutoDTO(model.getId(), model.getTarga(), model.getTipologia(), model.getMarca(), model.getModello(),
 				model.getTipoMotore(), model.getCilindrata(), model.getNumeroPosti(), model.getCambioAutomatico(),
-				model.getDataImmatricolazione(), model.getDescrizione(), model.getPrezzoPerGiornata());
+				model.getDataImmatricolazione(), model.getDescrizione(), model.getPrezzoPerGiornata(), model.getImageUrl());
 	}
 
 }

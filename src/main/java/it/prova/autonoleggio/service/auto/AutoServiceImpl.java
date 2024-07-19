@@ -1,6 +1,7 @@
 package it.prova.autonoleggio.service.auto;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,11 @@ public class AutoServiceImpl implements AutoService {
 				example.getModello(), example.getCilindrata(), example.getTipoMotore(), example.getNumeroPosti(),
 				example.getCambioAutomatico(), example.getDataImmatricolazione(), example.getDescrizione(),
 				example.getPrezzoPerGiornata());
+	}
+
+	@Override
+	public Optional<Auto> findByTarga(String targa) {
+		return autoRepository.findByTarga(targa);
 	}
 
 }

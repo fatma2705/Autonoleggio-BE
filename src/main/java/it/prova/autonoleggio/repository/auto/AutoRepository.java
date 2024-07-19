@@ -2,6 +2,7 @@ package it.prova.autonoleggio.repository.auto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -41,5 +42,7 @@ public interface AutoRepository extends CrudRepository<Auto, Long> {
 			return true;
 		return false;
 	}
+	
+	 Optional<Auto> findByTarga(String targa);
 
 }

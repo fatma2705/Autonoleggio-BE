@@ -61,6 +61,9 @@ public class Auto {
 
 	@Column(name = "prezzo_per_giornata")
 	private Float prezzoPerGiornata;
+	
+	@Column(name = "image_url")
+	 private String imageUrl;
 
 	@OneToMany(mappedBy = "auto", fetch = FetchType.LAZY)
 	private List<Prenotazione> prenotazioni;
