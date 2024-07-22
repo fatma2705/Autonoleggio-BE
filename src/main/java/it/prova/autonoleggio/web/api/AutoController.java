@@ -1,9 +1,11 @@
 package it.prova.autonoleggio.web.api;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,6 +71,20 @@ public class AutoController {
 		return autoService.findByExample(autoModel).stream().map(auto -> {
 			return AutoDTO.buildAutoDTOFromModel(auto);
 		}).collect(Collectors.toList());
+	}
+
+	@GetMapping("/isAvailable")
+	public boolean isAutoAvailable(@RequestParam Long autoId,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInizio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFine) {
+		return autoService.isAutoAvailable(autoId, dataInizio, dataFine);
+	}
+
+	@GetMapping("/available")
+	public List<Auto> getAvailableAutos(
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInizio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFine) {
+		return autoService.findAvailableAutos(dataInizio, dataFine);
 	}
 
 }

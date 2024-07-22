@@ -1,5 +1,6 @@
 package it.prova.autonoleggio.service.auto;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,17 @@ public class AutoServiceImpl implements AutoService {
 	@Override
 	public Optional<Auto> findByTarga(String targa) {
 		return autoRepository.findByTarga(targa);
+	}
+
+	@Override
+	public boolean isAutoAvailable(Long autoId, LocalDate dataInizio, LocalDate dataFine) {
+		Integer count = autoRepository.countPrenotazioniNonSovrapposte(autoId, dataInizio, dataFine);
+		return count == 0;
+	}
+
+	@Override
+	public List<Auto> findAvailableAutos(LocalDate dataInizio, LocalDate dataFine) {
+		return autoRepository.findAvailableAutos(dataInizio, dataFine);
 	}
 
 }

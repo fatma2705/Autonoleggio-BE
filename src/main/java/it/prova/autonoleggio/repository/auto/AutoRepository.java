@@ -42,7 +42,11 @@ public interface AutoRepository extends CrudRepository<Auto, Long> {
 			return true;
 		return false;
 	}
-	
-	 Optional<Auto> findByTarga(String targa);
+
+	Optional<Auto> findByTarga(String targa);
+
+	@Query("SELECT a FROM Auto a WHERE a.id NOT IN " + "(SELECT p.auto.id FROM Prenotazione p WHERE "
+			+ "(p.dataInizio <= :dataFine AND p.dataFine >= :dataInizio))")
+	List<Auto> findAvailableAutos(LocalDate dataInizio, LocalDate dataFine);
 
 }

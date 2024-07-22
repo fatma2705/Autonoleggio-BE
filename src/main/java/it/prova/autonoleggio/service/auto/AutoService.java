@@ -1,5 +1,6 @@
 package it.prova.autonoleggio.service.auto;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,5 +21,10 @@ public interface AutoService {
 	public List<Auto> findByExample(Auto example);
 	
 	public Optional<Auto> findByTarga(String targa);
+	
+    boolean isAutoAvailable(Long autoId, LocalDate dataInizio, LocalDate dataFine);
+    
+    List<Auto> findAvailableAutos(LocalDate dataInizio, LocalDate dataFine);
+
 
 }
