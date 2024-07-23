@@ -58,7 +58,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable()).cors(withDefaults())
 				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**").permitAll()
 						.requestMatchers("api/utente/userInfo").authenticated()
-						.requestMatchers("/api/auto/search", "/api/prenotazione/inserisci").hasRole("CLASSIC_USER")
+						.requestMatchers("/api/auto/search", "/api/prenotazione/inserisci","api/auto/**","api/utente/username/{username}").hasRole("CLASSIC_USER")
 						.requestMatchers("/api/utente/**", "/api/prenotazione/listAll","/api/auto/**").hasRole("ADMIN")
 						.requestMatchers("/**").hasAnyRole("ADMIN", "CLASSIC_USER").anyRequest().authenticated())
 				.httpBasic(withDefaults())

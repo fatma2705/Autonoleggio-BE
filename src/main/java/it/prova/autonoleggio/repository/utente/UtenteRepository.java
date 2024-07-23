@@ -11,7 +11,7 @@ import it.prova.autonoleggio.model.Utente;
 
 public interface UtenteRepository extends CrudRepository<Utente, Long>, JpaRepository<Utente, Long> {
 
-	@EntityGraph(attributePaths = { "ruoli" })
+	@Query("from Utente u left join fetch u.ruoli where u.username = ?1")
 	Optional<Utente> findByUsername(String username);
 
 	@Query("from Utente u left join fetch u.ruoli where u.id = ?1")

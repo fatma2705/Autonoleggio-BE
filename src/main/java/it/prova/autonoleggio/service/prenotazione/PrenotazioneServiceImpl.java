@@ -86,8 +86,10 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 		if (!(autoRepository.isAutoAvailable(prenotazione.getAuto().getId(), prenotazione.getDataInizio(),
 				prenotazione.getDataFine())))
 			throw new CarNotAvailableException();
-		Utente utente = utenteRepository.findByUsername(username).orElse(null);
-		prenotazione.setUtente(utente);
+		if (prenotazione.getUtente() == null) {
+			Utente utente = utenteRepository.findByUsername(username).orElse(null);
+			prenotazione.setUtente(utente);
+		}
 		return prenotazioneRepository.save(prenotazione);
 	}
 

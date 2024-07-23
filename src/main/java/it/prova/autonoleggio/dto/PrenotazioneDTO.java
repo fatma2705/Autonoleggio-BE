@@ -72,7 +72,14 @@ public class PrenotazioneDTO {
 
 	public static PrenotazioneDTO buildResponsePrenotazioneDTOFromModel(Prenotazione model) {
 		return new PrenotazioneDTO(model.getId(), model.getLocalitaRitiro(), model.getLocalitaRitiro(),
-				model.getDataInizio(), model.getDataFine());
+				model.getUtente(), model.getAuto(), model.getDataInizio(), model.getDataFine());
+	}
+
+	public PrenotazioneDTO(Long id, Localita localitaRitiro, Localita localitaConsegna, Utente utente, Auto auto,
+			LocalDate dataInizio, LocalDate dataFine) {
+		this(id, localitaRitiro, localitaConsegna, dataInizio, dataFine);
+		this.auto = auto;
+		this.utente = utente;
 	}
 
 }

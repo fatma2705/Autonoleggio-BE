@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/utente")
 public class UtenteController {
-	
+
 	@Autowired
 	private UtenteService utenteService;
 
@@ -69,6 +69,16 @@ public class UtenteController {
 		Utente aggiornata = input.buildUtenteModel(false);
 		aggiornata = utenteService.aggiorna(aggiornata);
 		return UtenteDTO.buildUtenteDTOFromModel(aggiornata);
+	}
+
+	@GetMapping("/username/{username}")
+	public ResponseEntity<Utente> getUtenteByUsername(@PathVariable String username) {
+		Utente utente = utenteService.findByUsername(username);
+		if (utente != null) {
+			return new ResponseEntity<>(utente, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
