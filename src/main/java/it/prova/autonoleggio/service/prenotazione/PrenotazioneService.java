@@ -17,5 +17,7 @@ public interface PrenotazioneService {
 	public List<Prenotazione> listaStoricoPrenotazioniUtente(String username);
 
 	public Prenotazione insertPrenotazione(Prenotazione prenotazione,String username);
+	
+	public Prenotazione caricaSingolaPrenotazione(Long id);
 
 }

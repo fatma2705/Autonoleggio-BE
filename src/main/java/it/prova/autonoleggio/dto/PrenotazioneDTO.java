@@ -82,4 +82,6 @@ public class PrenotazioneDTO {
 		this.utente = utente;
 	}
 
+	
+
 }

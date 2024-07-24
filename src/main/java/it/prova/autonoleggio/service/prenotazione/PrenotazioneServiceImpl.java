@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.prova.autonoleggio.exception.AccessDeniedException;
+import it.prova.autonoleggio.exception.AutoNotFoundException;
 import it.prova.autonoleggio.exception.CarNotAvailableException;
 import it.prova.autonoleggio.exception.NoBookingsFoundException;
 import it.prova.autonoleggio.exception.PrenotazioneNotfoundException;
+import it.prova.autonoleggio.model.Auto;
 import it.prova.autonoleggio.model.Prenotazione;
 import it.prova.autonoleggio.model.Utente;
 import it.prova.autonoleggio.repository.auto.AutoRepository;
@@ -48,8 +50,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 			throw new PrenotazioneNotfoundException();
 		if (!(prenotazione.getUtente().getUsername().equals(username)))
 			throw new AccessDeniedException();
-		if (!(autoRepository.isAutoAvailable(input.getAuto().getId(), input.getDataInizio(),
-				input.getDataFine())))
+		if (!(autoRepository.isAutoAvailable(input.getAuto().getId(), input.getDataInizio(), input.getDataFine())))
 			throw new CarNotAvailableException();
 		return prenotazioneRepository.save(input);
 	}
@@ -91,6 +92,14 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 			prenotazione.setUtente(utente);
 		}
 		return prenotazioneRepository.save(prenotazione);
+	}
+
+	@Override
+	public Prenotazione caricaSingolaPrenotazione(Long id) {
+		Prenotazione prenotazione = prenotazioneRepository.findById(id).orElse(null);
+		if (prenotazione.equals(null))
+			throw new NoBookingsFoundException();
+		return prenotazione;
 	}
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.prova.autonoleggio.dto.AutoDTO;
 import it.prova.autonoleggio.dto.PrenotazioneDTO;
 import it.prova.autonoleggio.model.Prenotazione;
 import it.prova.autonoleggio.service.prenotazione.PrenotazioneService;
@@ -70,6 +71,11 @@ public class PrenotazioneController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable(name = "id", required = true) Long id, Principal principal) {
 		prenotazioneService.eliminaPrenotazione(id, principal.getName());
+	}
+
+	@GetMapping("/{id}")
+	public PrenotazioneDTO getById(@PathVariable(name = "id", required = true) Long id) {
+		return PrenotazioneDTO.buildPrenotazioneDTOFromModel(prenotazioneService.caricaSingolaPrenotazione(id));
 	}
 
 }
