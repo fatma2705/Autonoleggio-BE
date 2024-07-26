@@ -1,5 +1,6 @@
 package it.prova.autonoleggio.web.api;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,6 +71,14 @@ public class UtenteController {
 		aggiornata = utenteService.aggiorna(aggiornata);
 		return UtenteDTO.buildUtenteDTOFromModel(aggiornata);
 	}
+	
+	@PutMapping("/aggiornaCredito")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public void aggiornaCredito(@Valid @RequestBody Float credit , Principal principal) {
+		utenteService.aggiornaCredito(credit , principal.getName());
+	}
+	
+	
 
 	@GetMapping("/username/{username}")
 	public ResponseEntity<Utente> getUtenteByUsername(@PathVariable String username) {

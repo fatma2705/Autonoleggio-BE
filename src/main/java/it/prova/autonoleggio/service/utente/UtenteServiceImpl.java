@@ -118,12 +118,11 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public Utente aggiornaCredito(Utente utenteInstance) {
-		Utente utenteReloaded = utenteRepository.findById(utenteInstance.getId()).orElse(null);
+	public void  aggiornaCredito(Float credit , String username) {
+		Utente utenteReloaded = utenteRepository.findByUsername(username).orElse(null);
 		if (utenteReloaded == null)
 			throw new UserNotFoundException();
-		utenteReloaded.setCreditoDisponibile(utenteInstance.getCreditoDisponibile());
-		return utenteRepository.save(utenteReloaded);
+		utenteRepository.aggiungiCredito(utenteReloaded.getId(), credit);
 	}
 
 }

@@ -9,7 +9,7 @@ import it.prova.autonoleggio.model.Prenotazione;
 
 public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Long> {
 
-	@Query("SELECT p FROM Prenotazione p WHERE p.utente.id = :utenteId")
+	@Query("SELECT p FROM Prenotazione p WHERE p.utente.id = :utenteId and p.annullata = false")
 	List<Prenotazione> findPrenotazioniByUtenteId(Long utenteId);
 
 }

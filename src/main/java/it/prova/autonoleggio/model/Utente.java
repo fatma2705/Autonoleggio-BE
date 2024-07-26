@@ -19,6 +19,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -104,6 +107,12 @@ public class Utente {
 		this.attivo = attivo;
 		this.dataConseguimentoPatente = dataConseguimentoPatente;
 	}
+	
+	public Utente(Long id, String username, String password, String confermaPassword, String email, String nome,
+			String cognome, Boolean attivo, LocalDate dataConseguimentoPatente, Float creditoDisponibile) {
+		this(id,username,password,confermaPassword,email,nome,cognome,attivo,dataConseguimentoPatente);
+		this.creditoDisponibile = creditoDisponibile;
+	}
 
 	public boolean isAdmin() {
 		for (Ruolo ruoloItem : ruoli) {
@@ -112,5 +121,6 @@ public class Utente {
 		}
 		return false;
 	}
+
 
 }

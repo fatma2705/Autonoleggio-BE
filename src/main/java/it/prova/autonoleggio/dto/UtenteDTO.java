@@ -53,7 +53,7 @@ public class UtenteDTO {
 	@NotNull(message = "{dataConseguimentoPatente.notnull}")
 	private LocalDate dataConseguimentoPatente;
 
-	@NotNull(message = "{creditoDisponibile.notnull}")
+	// @NotNull(message = "{creditoDisponibile.notnull}")
 	private Float creditoDisponibile;
 
 	private Long[] ruoliIds;
@@ -61,18 +61,19 @@ public class UtenteDTO {
 	private List<PrenotazioneDTO> prenotazioni;
 
 	public UtenteDTO(Long id, String username, String email, String nome, String cognome, Boolean attivo,
-			LocalDate dataConseguimentoPatente) {
+			LocalDate dataConseguimentoPatente, Float creditoDisponibile) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.attivo = attivo;
+		this.creditoDisponibile = creditoDisponibile;
 	}
 
 	public Utente buildUtenteModel(boolean includeIdRoles) {
 		Utente res = new Utente(id, username, password, confermaPassword, email, nome, cognome, attivo,
-				dataConseguimentoPatente);
+				dataConseguimentoPatente, creditoDisponibile);
 		if (includeIdRoles && ruoliIds != null)
 			res.setRuoli(Arrays.asList(ruoliIds).stream().map(id -> new Ruolo(id)).collect(Collectors.toSet()));
 		return res;
@@ -81,11 +82,13 @@ public class UtenteDTO {
 	public static UtenteDTO buildUtenteDTOFromModel(Utente utenteModel) {
 		UtenteDTO result = new UtenteDTO(utenteModel.getId(), utenteModel.getUsername(), utenteModel.getEmail(),
 				utenteModel.getNome(), utenteModel.getCognome(), utenteModel.getAttivo(),
-				utenteModel.getDataConseguimentoPatente());
+				utenteModel.getDataConseguimentoPatente(), utenteModel.getCreditoDisponibile());
 		if (!utenteModel.getRuoli().isEmpty())
 			result.ruoliIds = utenteModel.getRuoli().stream().map(r -> r.getId()).collect(Collectors.toList())
 					.toArray(new Long[] {});
 		return result;
 	}
+
+	
 
 }

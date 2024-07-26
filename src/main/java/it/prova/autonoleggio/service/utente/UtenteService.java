@@ -26,6 +26,6 @@ public interface UtenteService {
 
 	public Utente findByUsername(String username);
 	
-	public Utente aggiornaCredito(Utente utenteInstance);
+	public void aggiornaCredito(Float credit , String username);
 
 }
